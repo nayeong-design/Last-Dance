@@ -68,8 +68,9 @@
 }
 .ring { position: relative; width: 166px; height: 166px; display: grid; place-items: center; }
 .ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
-.ringArc { animation: ring 1s linear forwards; stroke-dashoffset: 0; }
-@keyframes ring { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 471; } }
+/* 3초 카운트다운 동안 원이 한 번만 채워진다 (비어 있음 → 가득). 471 ≈ 2π × 75 */
+.ringArc { animation: ring 3s linear forwards; stroke-dashoffset: 471; }
+@keyframes ring { from { stroke-dashoffset: 471; } to { stroke-dashoffset: 0; } }
 .flash { position: absolute; inset: 0; background: #fff; animation: flash 600ms ease-out forwards; }
 @keyframes flash { from { opacity: 0.95; } to { opacity: 0; } }
 .camSelect { position: absolute; left: 27px; top: 722px; width: 783px; display: flex; align-items: center; justify-content: space-between; }

@@ -192,7 +192,6 @@ function CameraPanel({ onDone }: { onDone: () => void }) {
               <svg width="166" height="166" viewBox="0 0 166 166">
                 <circle cx="83" cy="83" r="75" stroke="color-mix(in srgb, var(--accent) 20%, transparent)" strokeWidth="8" fill="none" />
                 <circle
-                  key={count}
                   className={s.ringArc}
                   cx="83" cy="83" r="75" stroke="var(--accent)" strokeWidth="8" fill="none" strokeLinecap="round"
                   strokeDasharray={2 * Math.PI * 75}

@@ -35,6 +35,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -213,7 +221,19 @@ private fun CameraPanel(s: UiState, vm: LastDanceViewModel) {
             Image(painterResource(R.drawable.camera_preview), "실내 카메라 미리보기", Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
             if (count > 0) Column(Modifier.align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text("${count}초 후 촬영", style = LDType.titleMBold)
-                Box(Modifier.padding(top = 20.dp).size(160.dp).border(8.dp, LD.accent, CircleShape), contentAlignment = Alignment.Center) {
+                // 3초 카운트다운 동안 원이 한 번만 채워진다 (비어 있음 → 가득).
+                val fill = remember { Animatable(0f) }
+                LaunchedEffect(Unit) { fill.animateTo(1f, tween(3000, easing = LinearEasing)) }
+                Box(
+                    Modifier.padding(top = 20.dp).size(160.dp).drawBehind {
+                        val w = 8.dp.toPx()
+                        val inset = Size(size.width - w, size.height - w)
+                        val tl = Offset(w / 2, w / 2)
+                        drawArc(LD.accent.copy(alpha = 0.2f), 0f, 360f, false, tl, inset, style = Stroke(w))
+                        drawArc(LD.accent, -90f, 360f * fill.value, false, tl, inset, style = Stroke(w, cap = StrokeCap.Round))
+                    },
+                    contentAlignment = Alignment.Center,
+                ) {
                     Text("$count", style = LDType.headlineLBold, color = LD.accent)
                 }
             } else Box(Modifier.fillMaxSize().background(Color.White.copy(alpha = 0.6f)))
