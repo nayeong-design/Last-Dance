@@ -1,0 +1,30 @@
+/*
+ * Type ramp — names mirror Figma text styles (Typography/<Group>/<Size>/<Weight>).
+ * Use these classes; do not set font-size/line-height ad hoc in components.
+ */
+.t-headline-l-bold { font: 700 60px/80px var(--font-family); }
+.t-headline-s-bold { font: 700 48px/64px var(--font-family); }
+.t-headline-s-xbold { font: 800 48px/64px var(--font-family); }
+.t-title-l-bold { font: 700 40px/52px var(--font-family); }
+.t-title-l-xbold { font: 800 40px/52px var(--font-family); }
+.t-title-m-bold { font: 700 36px/44px var(--font-family); }
+.t-title-m-semibold { font: 600 36px/44px var(--font-family); }
+.t-title-m-xbold { font: 800 36px/44px var(--font-family); }
+.t-title-s-regular { font: 400 32px/40px var(--font-family); }
+.t-title-s-bold { font: 700 32px/40px var(--font-family); }
+.t-title-s-xbold { font: 800 32px/40px var(--font-family); }
+.t-body-l-regular { font: 400 30px/38px var(--font-family); }
+.t-body-l-bold { font: 700 30px/38px var(--font-family); }
+.t-body-m-regular { font: 400 28px/36px var(--font-family); }
+.t-body-m-semibold { font: 600 28px/36px var(--font-family); }
+.t-body-m-bold { font: 700 28px/36px var(--font-family); }
+.t-body-s-regular { font: 400 26px/34px var(--font-family); }
+.t-body-s-semibold { font: 600 26px/34px var(--font-family); }
+.t-body-s-bold { font: 700 26px/34px var(--font-family); }
+.t-label-m-regular { font: 400 24px/28px var(--font-family); }
+.t-label-m-medium { font: 500 24px/28px var(--font-family); }
+.t-label-m-bold { font: 700 24px/28px var(--font-family); }
+.t-label-m-xbold { font: 800 24px/28px var(--font-family); }
+.t-label-s-medium { font: 500 22px/26px var(--font-family); }
+.t-label-s-regular { font: 400 20px/24px var(--font-family); }
+.t-caption-medium { font: 500 18px/22px var(--font-family); }

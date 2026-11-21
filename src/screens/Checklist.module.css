@@ -1,0 +1,20 @@
+.scrim { position: absolute; inset: 0; display: grid; place-items: center; }
+.modal {
+  background: var(--bg-surface); border-radius: var(--radius-xl); padding: 40px 60px; width: 796px;
+  display: flex; flex-direction: column; gap: 40px; animation: pop var(--dur-base) var(--ease-standard);
+}
+@keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+.list {
+  list-style: none; display: flex; flex-direction: column; max-height: 660px; overflow-y: auto; padding-right: 12px; margin-right: -12px;
+  scrollbar-width: thin; scrollbar-color: var(--bg-pressed) transparent;
+}
+.list li { padding: 14px 0; position: relative; }
+.list li:first-child { padding-top: 0; }
+.list li:not(:last-child)::after {
+  content: ''; position: absolute; bottom: 0; left: 55px; width: 566px; height: 1px; background: var(--border-strong);
+}
+.list li { padding-bottom: 28px; margin-bottom: 0; }
+.list li + li { padding-top: 28px; }
+.item { display: flex; align-items: center; gap: 48px; width: 676px; text-align: left; }
+.item:active { opacity: 0.8; }
+.text { display: flex; flex-direction: column; gap: 8px; }

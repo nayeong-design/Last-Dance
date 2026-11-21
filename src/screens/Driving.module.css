@@ -1,0 +1,114 @@
+.cover { position: absolute; left: 860px; top: 113px; width: 1656px; height: 1187px; background: var(--bg-base); }
+.window { position: absolute; left: var(--app-x); top: var(--app-y); width: var(--app-w); height: var(--app-h); border-radius: var(--radius-window); background: var(--bg-base); }
+
+/* ---------- Navigation split ---------- */
+.nav { position: absolute; left: 878px; top: 113px; width: 838px; height: 1187px; border-radius: var(--radius-window); overflow: hidden; background: #fff; }
+.navRoad { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.turn {
+  position: absolute; left: 25px; top: 35px; width: 787px; padding: 16px 50px; border-radius: var(--radius-lg);
+  background: var(--bg-surface); display: flex; align-items: center; gap: 12px;
+}
+.navCar { position: absolute; left: calc(50% + 3.79px); top: calc(50% + 244.5px); transform: translate(-50%, -50%); width: 138px; height: 214px; }
+.navBar {
+  position: absolute; left: 25px; top: 1047px; padding: 16px; border-radius: var(--radius-lg); background: var(--bg-surface);
+  display: flex; align-items: center; gap: 24px;
+}
+.navSearch { width: 76px; height: 76px; border-radius: var(--radius-md); border: 1px solid var(--p-gray-400); display: grid; place-items: center; }
+.navInfo { position: relative; display: flex; flex-direction: column; gap: 27px; }
+.navMeta { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.dim { color: var(--p-gray-400); }
+.battery { position: relative; width: 36px; height: 21px; border-radius: 4px; background: var(--border-subtle); }
+.battery i { position: absolute; left: 0; top: 0; width: 27px; height: 21px; border-radius: 4px 0 0 4px; background: var(--p-gray-600); }
+.traffic { position: relative; width: 461px; height: 6px; border-radius: 6px; overflow: hidden; background: #fff; }
+.traffic i { position: absolute; top: 50%; transform: translateY(-50%); height: 6px; }
+.knob { position: absolute; left: 320px; top: 43px; }
+.navEnd { padding: 24px 44px; border-radius: var(--radius-md); background: var(--p-gray-600); color: var(--text-on-accent); }
+
+/* ---------- Last Dance record panel (right split) ---------- */
+.panel {
+  position: absolute; left: 1740px; top: 116px; width: 840px; height: 1184px; padding: 40px; border-radius: var(--radius-window);
+  background: var(--bg-surface); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden;
+}
+.panelHead { position: absolute; left: 35px; top: 0; width: 765px; height: 132px; display: flex; align-items: center; justify-content: space-between; }
+.panelBody { display: flex; flex-direction: column; gap: 60px; width: 760px; }
+.record { background: var(--bg-base); border-radius: var(--radius-md); padding: 32px; display: flex; flex-direction: column; gap: 45px; }
+.recordInner { padding: 0 4px; display: flex; flex-direction: column; gap: 81px; }
+.recStatus { display: flex; align-items: center; gap: 12px; }
+.blink { animation: blink 1.2s steps(2, start) infinite; }
+@keyframes blink { to { visibility: hidden; } }
+.stats { display: grid; grid-template-columns: 191px 87px auto; column-gap: 72px; row-gap: 28px; width: 563px; }
+.stats > div { display: flex; flex-direction: column; gap: 8px; white-space: nowrap; }
+.stats > div:nth-child(4) { grid-column: 1; }
+.stats dt { color: var(--text-secondary); }
+.recButtons { display: flex; gap: 16px; width: 688px; }
+.recBtn { flex: 1; padding: 24px; border-radius: var(--radius-sm); background: var(--bg-elevated); color: var(--p-white); }
+.recEnd { background: var(--status-danger-bg); box-shadow: var(--shadow-button); }
+
+.tools { display: flex; flex-direction: column; gap: 16px; }
+.tiles { display: flex; gap: 16px; }
+.tile {
+  height: 200px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px;
+  box-shadow: 0 6px 12px rgba(20, 0, 0, 0.08); transition: border-color var(--dur-fast);
+}
+.tile:hover { border-color: rgba(120, 236, 214, 0.9); }
+.thumb { width: 200px; height: 200px; border-radius: var(--radius-md); overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Camera / drive snapshot ---------- */
+.camera { position: absolute; left: 1741px; top: 116px; width: 838px; height: 1184px; z-index: 5; animation: camIn var(--dur-base) var(--ease-standard); }
+@keyframes camIn { from { opacity: 0; } to { opacity: 1; } }
+.cameraBase { position: absolute; left: 0; top: 626px; width: 838px; height: 558px; border-radius: var(--radius-2xl); background: var(--bg-surface); }
+.preview { position: absolute; left: 0; top: 0; width: 838px; height: 682px; border-radius: var(--radius-2xl); overflow: hidden; background: #bcbcbc; }
+.preview > img { width: 100%; height: 100%; object-fit: cover; }
+.guideTop { position: absolute; left: 267px; top: 203px; }
+.guideBottom { position: absolute; left: 267px; top: 404px; transform: rotate(180deg); }
+.guideCross { position: absolute; left: 400px; top: 298px; }
+.countdown {
+  position: absolute; left: 283px; top: 179px; width: 294px; height: 297px; border-radius: var(--radius-2xl);
+  background: var(--bg-scrim); display: flex; flex-direction: column; align-items: center; padding-top: 26px; gap: 33px;
+}
+.ring { position: relative; width: 166px; height: 166px; display: grid; place-items: center; }
+.ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ringArc { animation: ring 1s linear forwards; stroke-dashoffset: 0; }
+@keyframes ring { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 471; } }
+.flash { position: absolute; inset: 0; background: #fff; animation: flash 600ms ease-out forwards; }
+@keyframes flash { from { opacity: 0.95; } to { opacity: 0; } }
+.camSelect { position: absolute; left: 27px; top: 722px; width: 783px; display: flex; align-items: center; justify-content: space-between; }
+.camSide { padding: 16px 32px; border-radius: 50px; background: var(--bg-pressed); }
+.camActive {
+  width: 366px; height: 70px; border-radius: 50px; background: var(--bg-elevated); border: 1px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+}
+.camThumb { position: absolute; left: 58px; top: 930px; width: 117px; height: 120px; border-radius: 30px; border: 3px solid var(--border-strong); overflow: hidden; background: #dadada; }
+.camThumb img { width: 100%; height: 100%; object-fit: cover; }
+.shutter {
+  position: absolute; left: 321px; top: 890px; width: 195px; height: 200px; border-radius: 143px; background: var(--bg-base);
+  display: grid; place-items: center;
+}
+.shutter i { width: 144px; height: 144px; border-radius: 50%; background: var(--p-gray-700); border: 3px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow); transition: transform var(--dur-fast); }
+.shutter:active i { transform: scale(0.92); }
+.camClose { position: absolute; left: 666px; top: 931px; width: 117px; height: 120px; border-radius: 30px; background: var(--bg-base); display: grid; place-items: center; }
+
+/* ---------- ADAS overlay ---------- */
+.popup {
+  position: absolute; left: 220px; top: 659px; padding: 16px 32px; border-radius: var(--radius-lg); background: var(--bg-pressed);
+  white-space: nowrap; animation: popupIn var(--dur-slow) var(--ease-standard);
+}
+@keyframes popupIn { from { opacity: 0; transform: translateY(12px) scale(0.96); } to { opacity: 1; transform: none; } }
+.carGlow { position: absolute; left: 201px; top: 673px; width: 483px; height: 408px; pointer-events: none; }
+.carGlow i {
+  position: absolute; border-radius: 50%; background: rgba(189, 254, 28, 0.85); filter: blur(34px);
+  animation: glowPulse 1.6s ease-in-out infinite alternate;
+}
+@keyframes glowPulse { from { opacity: 0.55; } to { opacity: 1; } }
+.reaction {
+  position: absolute; border-radius: 19.5px; background: var(--bg-elevated); display: grid; place-items: center;
+  animation: bubble 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.reaction img { object-fit: contain; }
+@keyframes bubble { from { opacity: 0; transform: scale(0.3) translateY(30px); } to { opacity: 1; transform: none; } }
+.notify {
+  position: absolute; left: 332px; top: 995px; width: 228px; height: 60px; border-radius: 19.5px;
+  background: var(--bg-elevated); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; gap: 6px;
+}

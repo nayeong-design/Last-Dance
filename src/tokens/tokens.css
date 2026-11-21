@@ -1,0 +1,124 @@
+/*
+ * Last Dance — Design Tokens
+ * Source of truth: Figma "현대차 앱개발 공모전" / Page 3 (variables shown by get_design_context).
+ * Layer 1 = primitive (raw palette). Layer 2 = semantic (what UI code uses).
+ * UI code MUST use semantic tokens only. See DESIGN.md §2.
+ */
+
+:root {
+  /* ───────── Layer 1 · Primitive ───────── */
+  /* dark gray scale (Figma: dark-gray-scale/basic_xx) */
+  --p-gray-00: #131417;
+  --p-gray-50: #1d1e21;
+  --p-gray-75: #292a2e;
+  --p-gray-100: #313236;
+  --p-gray-150: #36383e;
+  --p-gray-200: #44464e;
+  --p-gray-300: #686a72;
+  --p-gray-350: #858790;
+  --p-gray-400: #a4a8ae;
+  --p-gray-500: #c7c9ce;
+  --p-gray-600: #e0e1e6;
+  --p-gray-700: #edeef2;
+  --p-gray-800: #f7f8fa;
+  --p-white: #ffffff;
+  --p-black: #000000;
+
+  /* lime (Figma: mobility/lime/*) */
+  --p-lime-key: #bdfe1c;
+  --p-lime-text: #b8f71b;
+  --p-lime-400: #8bc91b;
+  --p-lime-700: #365319;
+  --p-green-500: #44b15c;
+
+  /* support */
+  --p-red-500: #ff3654;
+  --p-red-700: #d90a35;
+  --p-red-900: #650019;
+  --p-orange-500: #ff8a00;
+  --p-blue-500: #286cff;
+  --p-purple-500: #8547ff;
+
+  /* ───────── Layer 2 · Semantic ───────── */
+  /* background (mobility/gray-scale/bg/*) */
+  --bg-base: var(--p-gray-00);
+  --bg-surface: var(--p-gray-50);
+  --bg-elevated: var(--p-gray-75);
+  --bg-card-strong: var(--p-gray-100);
+  --bg-pressed: var(--p-gray-150);
+  --bg-scrim: rgba(19, 20, 23, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.2);
+
+  /* text (mobility/gray-scale/txt/*) */
+  --text-primary: var(--p-gray-800);
+  --text-secondary: var(--p-gray-500);
+  --text-tertiary: var(--p-gray-400);
+  --text-disabled: var(--p-gray-350);
+  --text-on-accent: var(--p-gray-00);
+  --text-accent: var(--p-lime-text);
+
+  /* border (mobility/gray-scale/border/*) */
+  --border-subtle: var(--p-gray-200);
+  --border-strong: var(--p-gray-300);
+  --border-card: #252629;
+  --border-accent: var(--p-lime-key);
+  --border-accent-soft: rgba(189, 254, 28, 0.8);
+  --border-gallery: var(--p-lime-700);
+
+  /* accent */
+  --accent: var(--p-lime-key);
+  --accent-glow: rgba(189, 254, 28, 0.5);
+  --accent-wash: linear-gradient(140.84deg, rgba(189, 254, 28, 0.1) 10.21%, rgba(68, 177, 92, 0.1) 93.1%, rgba(189, 254, 28, 0.3) 115.61%);
+
+  /* status */
+  --status-recording: var(--p-red-500);
+  --status-danger-bg: var(--p-red-900);
+  --traffic-free: var(--p-lime-400);
+  --traffic-slow: var(--p-orange-500);
+  --traffic-jam: var(--p-red-700);
+  --map-pin: var(--p-blue-500);
+  --map-waypoint: var(--p-purple-500);
+
+  /* radius (spacing/radius tokens) */
+  --radius-xs: 10px;
+  --radius-sm: 16px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
+  --radius-window: 40px;
+  --radius-pill: 999px;
+
+  /* spacing (4px grid) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-60: 60px;
+
+  /* elevation */
+  --shadow-level1: 0 6px 24px 0 rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 7px 14px rgba(20, 0, 0, 0.2);
+
+  /* Pleos Connect window (window/apps/*) */
+  --stage-w: 2600px;
+  --stage-h: 1480px;
+  --app-x: 880px;
+  --app-y: 116px;
+  --app-w: 1700px;
+  --app-h: 1184px;
+
+  /* motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+
+  --font-family: 'Asta Sans', 'Pretendard', system-ui, sans-serif;
+}
