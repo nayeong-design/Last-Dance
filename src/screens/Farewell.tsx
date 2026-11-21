@@ -85,7 +85,7 @@ export function FarewellSetup() {
       </p>
 
       <form className={s.form} onSubmit={(e) => e.preventDefault()}>
-        <div className={s.group} style={{ width: 548 }}>
+        <div className={s.group}>
           <span className="pill-label t-body-l-bold">차량 교체 일자</span>
           <div className={s.row}>
             {sel('year', '년도', '년', range(2026, 2028))}

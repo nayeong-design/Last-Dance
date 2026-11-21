@@ -88,7 +88,7 @@ img { display: block; }
 
 /* ---------- Dropdown (디자인 시스템 선택 목록) ---------- */
 .dropdown { position: relative; display: inline-block; }
-.dropdown__trigger { width: 100%; text-align: left; color: var(--text-primary); transition: border-color var(--dur-fast) var(--ease-standard); }
+.dropdown__trigger { white-space: nowrap; width: 100%; text-align: left; color: var(--text-primary); transition: border-color var(--dur-fast) var(--ease-standard); }
 .dropdown--open .dropdown__trigger, .dropdown__trigger:focus-visible { border-color: var(--accent); outline: none; }
 .dropdown__placeholder { color: var(--text-primary); }
 .dropdown__chevron { flex: none; transition: transform var(--dur-base) var(--ease-standard); }
