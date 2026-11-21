@@ -4,6 +4,7 @@ import { vehicle } from '../pleos/sdk';
 import { PrimaryButton, Toast, TopNav } from '../components/ui';
 import { DotActive, DotIdle, IcChat, IcSnapshot, IcSunset } from '../components/icons';
 import { Dropdown } from '../components/Dropdown';
+import { clampDate, dateOptions } from '../state/dateOptions';
 import s from './Farewell.module.css';
 
 function Heading() {
@@ -53,7 +54,6 @@ function useToast() {
   return { msg, show };
 }
 
-const range = (a: number, b: number) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 
 /** Figma 354:2290 — 차량 교체 일자 / 이별 사유 등록 */
 export function FarewellSetup() {
@@ -70,9 +70,10 @@ export function FarewellSetup() {
       placeholder={label}
       value={f[key]}
       options={opts.map((o) => ({ value: o, label: `${o}${unit}` }))}
-      onChange={(v) => dispatch({ type: 'farewell', patch: { [key]: v } })}
+      onChange={(v) => dispatch({ type: 'farewell', patch: clampDate({ year: f.year, month: f.month, day: f.day, [key]: v }) })}
     />
   );
+  const opts = dateOptions(f);
 
   return (
     <>
@@ -88,9 +89,9 @@ export function FarewellSetup() {
         <div className={s.group}>
           <span className="pill-label t-body-l-bold">차량 교체 일자</span>
           <div className={s.row}>
-            {sel('year', '년도', '년', range(2026, 2028))}
-            {sel('month', '월', '월', range(1, 12))}
-            {sel('day', '일', '일', range(1, 31))}
+            {sel('year', '년도', '년', opts.years)}
+            {sel('month', '월', '월', opts.months)}
+            {sel('day', '일', '일', opts.days)}
           </div>
         </div>
         <div className={s.group}>

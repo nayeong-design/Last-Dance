@@ -43,6 +43,8 @@ import com.lastdance.app.state.LastDanceViewModel
 import com.lastdance.app.state.REASONS
 import com.lastdance.app.state.Screen
 import com.lastdance.app.state.UiState
+import com.lastdance.app.state.clampDate
+import com.lastdance.app.state.dateOptions
 import com.lastdance.app.ui.components.LDCard
 import com.lastdance.app.ui.components.PillLabel
 import com.lastdance.app.ui.components.PrimaryButton
@@ -101,9 +103,10 @@ fun FarewellSetupScreen(s: UiState, vm: LastDanceViewModel) {
         ) {
             PillLabel("차량 교체 일자")
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                Select(f.year?.let { "${it}년" } ?: "년도", (2026..2028).map { "${it}년" }, 184.dp) { i -> vm.updateFarewell { it.copy(year = 2026 + i) } }
-                Select(f.month?.let { "${it}월" } ?: "월", (1..12).map { "${it}월" }, 160.dp) { i -> vm.updateFarewell { it.copy(month = i + 1) } }
-                Select(f.day?.let { "${it}일" } ?: "일", (1..31).map { "${it}일" }, 160.dp) { i -> vm.updateFarewell { it.copy(day = i + 1) } }
+                val o = dateOptions(f.year, f.month)
+                Select(f.year?.let { "${it}년" } ?: "년도", o.years.map { "${it}년" }, 184.dp) { i -> vm.updateFarewell { it.copy(year = o.years[i]).clampDate() } }
+                Select(f.month?.let { "${it}월" } ?: "월", o.months.map { "${it}월" }, 160.dp) { i -> vm.updateFarewell { it.copy(month = o.months[i]).clampDate() } }
+                Select(f.day?.let { "${it}일" } ?: "일", o.days.map { "${it}일" }, 160.dp) { i -> vm.updateFarewell { it.copy(day = o.days[i]) } }
             }
             PillLabel("차량 이별 사유")
             Select(f.reason, REASONS, 636.dp) { i -> vm.updateFarewell { it.copy(reason = REASONS[i]) } }

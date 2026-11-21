@@ -119,4 +119,23 @@ class LastDanceViewModel : ViewModel() {
     }
 }
 
+/** 차량 교체 일자 선택지 — 오늘(포함) 이후만. 웹 `src/state/dateOptions.ts`와 동일 */
+data class DateOptions(val years: List<Int>, val months: List<Int>, val days: List<Int>)
+
+fun dateOptions(year: Int?, month: Int?, today: java.time.LocalDate = java.time.LocalDate.now()): DateOptions {
+    val y = year ?: today.year
+    val months = ((if (y == today.year) today.monthValue else 1)..12).toList()
+    val days = if (month == null) (1..31).toList()
+    else ((if (y == today.year && month == today.monthValue) today.dayOfMonth else 1)..java.time.YearMonth.of(y, month).lengthOfMonth()).toList()
+    return DateOptions((today.year..today.year + 2).toList(), months, days)
+}
+
+/** 한 칸을 바꾼 뒤 고를 수 없게 된 월 · 일은 비운다 */
+fun Farewell.clampDate(): Farewell {
+    var f = this
+    if (f.month != null && f.month !in dateOptions(f.year, null).months) f = f.copy(month = null, day = null)
+    if (f.day != null && f.day !in dateOptions(f.year, f.month).days) f = f.copy(day = null)
+    return f
+}
+
 fun fmtTime(sec: Int) = "%02d:%02d:%02d".format(sec / 3600, (sec % 3600) / 60, sec % 60)
