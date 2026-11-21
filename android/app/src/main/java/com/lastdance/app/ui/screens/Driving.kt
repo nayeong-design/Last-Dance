@@ -24,7 +24,12 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+import android.media.AudioAttributes
+import android.media.SoundPool
+import kotlin.random.Random
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -66,8 +71,27 @@ fun DrivingScreen(s: UiState, vm: LastDanceViewModel) {
     }
 }
 
+/** 응원 반응 수신음 (res/raw/pebble.wav). 알림 용도의 오디오 속성으로 재생해 미디어와 섞이게 한다. */
+@Composable
+private fun rememberPebble(): () -> Unit {
+    val context = LocalContext.current
+    val pool = remember {
+        SoundPool.Builder().setMaxStreams(2).setAudioAttributes(
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+        ).build()
+    }
+    val id = remember { pool.load(context, R.raw.pebble, 1) }
+    DisposableEffect(Unit) { onDispose { pool.release() } }
+    return { pool.play(id, 0.6f, 0.6f, 1, 0, 0.92f + Random.nextFloat() * 0.16f) }
+}
+
 @Composable
 private fun NavPanel(s: UiState, vm: LastDanceViewModel, modifier: Modifier) {
+    val pebble = rememberPebble()
+    LaunchedEffect(s.reactions.size) { if (s.reactions.isNotEmpty()) pebble() }
     val route = Pleos.current.navigation.routeAt((s.recording.elapsed % 600) / 600f)
     Box(modifier.clip(RoundedCornerShape(Radius.window))) {
         Image(painterResource(R.drawable.nav_road), "내비게이션 지도", Modifier.fillMaxSize(), contentScale = ContentScale.Crop)

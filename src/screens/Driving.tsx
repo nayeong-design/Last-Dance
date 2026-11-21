@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { fmtTime, useStore } from '../state/store';
+import { earcon } from '../pleos/sound';
 import { adas, camera as cam, gleo, navigation, weather, type CameraId, type Reaction } from '../pleos/sdk';
 import { MiniPlayer } from '../components/ui';
 import {
@@ -236,7 +237,10 @@ export default function Driving() {
 
   useEffect(() => {
     if (!st.notifying) return;
-    const off = adas.reactions.on((r) => dispatch({ type: 'reaction', r }));
+    const off = adas.reactions.on((r) => {
+      dispatch({ type: 'reaction', r });
+      earcon.pebble(); // 응원 반응 수신음
+    });
     const stop = adas.broadcastFarewell();
     return () => {
       off();
@@ -273,7 +277,10 @@ export default function Driving() {
           })}
         </>
       )}
-      <button className={`${s.notify} t-label-s-medium pressable`} onClick={() => dispatch({ type: 'notify', on: !st.notifying })}>
+      <button className={`${s.notify} t-label-s-medium pressable`} onClick={() => {
+          earcon.unlock();
+          dispatch({ type: 'notify', on: !st.notifying });
+        }}>
         {st.notifying ? (
           '알리기 취소'
         ) : (
