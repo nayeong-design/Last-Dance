@@ -151,7 +151,17 @@ function CameraPanel({ onDone }: { onDone: () => void }) {
   const { s: st, dispatch } = useStore();
   const [count, setCount] = useState(3);
   const [flash, setFlash] = useState(false);
-  const ids: CameraId[] = ['left', 'front-center', 'right'];
+  // 칸은 [왼쪽, 중앙, 오른쪽]으로 고정. 좌우 칸을 누르면 그 카메라가 중앙 칸과 자리를 바꾼다.
+  const [slots, setSlots] = useState<CameraId[]>(() => {
+    const rest = (['left', 'right', 'front-center'] as CameraId[]).filter((c) => c !== st.cameraId);
+    return [rest[0], st.cameraId, rest[1]];
+  });
+  const pick = (i: number) => {
+    const next = [...slots];
+    [next[i], next[1]] = [next[1], next[i]];
+    setSlots(next);
+    dispatch({ type: 'camera', id: next[1] });
+  };
 
   // 녹화 타이머가 매초 리렌더를 일으키므로 onDone은 ref로 고정하고 count에만 반응한다.
   const done = useRef(onDone);
@@ -197,15 +207,20 @@ function CameraPanel({ onDone }: { onDone: () => void }) {
         {flash && <div className={s.flash} />}
       </div>
       <div className={s.camSelect}>
-        {ids.map((id) =>
-          id === st.cameraId ? (
-            <span key={id} className={`${s.camActive} t-body-l-bold`}>
+        {slots.map((id, i) =>
+          i === 1 ? (
+            <span key="center" className={`${s.camActive} t-body-l-bold`} aria-live="polite">
               {cam.label(id)}
               <IcExchange />
             </span>
           ) : (
-            <button key={id} className={`${s.camSide} t-body-l-bold pressable`} onClick={() => dispatch({ type: 'camera', id })}>
-              {cam.label(id)}
+            <button
+              key={i === 0 ? 'left' : 'right'}
+              className={`${s.camSide} t-body-l-bold pressable`}
+              onClick={() => pick(i)}
+              aria-label={`${cam.label(id)}로 바꾸기`}
+            >
+              {cam.shortLabel(id)}
             </button>
           ),
         )}

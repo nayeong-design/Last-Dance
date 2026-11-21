@@ -26,7 +26,10 @@ data class Weather(val label: String, val tempC: Int)
 
 enum class Reaction { Fist, Thumb, Heart, Party, Clap }
 
-enum class CameraId(val label: String) { Left("좌측"), FrontCenter("앞 중앙 카메라"), Right("우측") }
+/** label = 중앙(선택) 칸, shortLabel = 좌우 칸 (모두 두 글자) */
+enum class CameraId(val label: String, val shortLabel: String) {
+    Left("좌측 카메라", "좌측"), FrontCenter("앞 중앙 카메라", "중앙"), Right("우측 카메라", "우측")
+}
 
 interface VehicleSdk { fun info(): VehicleInfo }
 interface NavigationSdk { fun routeAt(progress: Float): RouteStatus }

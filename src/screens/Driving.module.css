@@ -73,9 +73,9 @@
 .flash { position: absolute; inset: 0; background: #fff; animation: flash 600ms ease-out forwards; }
 @keyframes flash { from { opacity: 0.95; } to { opacity: 0; } }
 .camSelect { position: absolute; left: 27px; top: 722px; width: 783px; display: flex; align-items: center; justify-content: space-between; }
-.camSide { padding: 16px 32px; border-radius: 50px; background: var(--bg-pressed); }
+.camSide { flex: none; padding: 16px 32px; border-radius: 50px; background: var(--bg-pressed); white-space: nowrap; }
 .camActive {
-  width: 366px; height: 70px; border-radius: 50px; background: var(--bg-elevated); border: 1px solid var(--accent);
+  flex: none; width: 366px; height: 70px; border-radius: 50px; white-space: nowrap; background: var(--bg-elevated); border: 1px solid var(--accent);
   display: flex; align-items: center; justify-content: center; gap: 18px;
 }
 .camThumb { position: absolute; left: 58px; top: 930px; width: 117px; height: 120px; border-radius: 30px; border: 3px solid var(--border-strong); overflow: hidden; background: #dadada; }

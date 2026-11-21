@@ -31,6 +31,7 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import kotlin.random.Random
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -40,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.lastdance.app.R
 import com.lastdance.app.pleos.CameraId
@@ -216,15 +218,30 @@ private fun CameraPanel(s: UiState, vm: LastDanceViewModel) {
                 }
             } else Box(Modifier.fillMaxSize().background(Color.White.copy(alpha = 0.6f)))
         }
-        Row(Modifier.fillMaxWidth().padding(28.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            CameraId.entries.forEach { id ->
-                val on = id == s.cameraId
-                Text(
-                    id.label, style = LDType.bodySSemibold,
-                    modifier = Modifier.clip(RoundedCornerShape(99.dp)).background(LD.bgElevated)
-                        .border(1.dp, if (on) LD.accent else Color.Transparent, RoundedCornerShape(99.dp))
-                        .pressable(id.label) { vm.selectCamera(id) }.padding(horizontal = 32.dp, vertical = 16.dp),
-                )
+        // 칸은 [왼쪽, 중앙, 오른쪽]으로 고정. 좌우 칸을 누르면 그 카메라가 중앙 칸과 자리를 바꾼다.
+        var slots by remember {
+            val rest = listOf(CameraId.Left, CameraId.Right, CameraId.FrontCenter).filter { it != s.cameraId }
+            mutableStateOf(listOf(rest[0], s.cameraId, rest[1]))
+        }
+        Row(Modifier.fillMaxWidth().padding(28.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            slots.forEachIndexed { i, id ->
+                if (i == 1) {
+                    Text(
+                        id.label, style = LDType.bodySSemibold, maxLines = 1, textAlign = TextAlign.Center,
+                        modifier = Modifier.width(366.dp).clip(RoundedCornerShape(99.dp)).background(LD.bgElevated)
+                            .border(1.dp, LD.accent, RoundedCornerShape(99.dp)).padding(vertical = 16.dp),
+                    )
+                } else {
+                    Text(
+                        id.shortLabel, style = LDType.bodySSemibold, maxLines = 1,
+                        modifier = Modifier.clip(RoundedCornerShape(99.dp)).background(LD.bgPressed)
+                            .pressable("${id.label}로 바꾸기") {
+                                val next = slots.toMutableList().also { l -> l[i] = slots[1]; l[1] = slots[i] }
+                                slots = next
+                                vm.selectCamera(next[1])
+                            }.padding(horizontal = 32.dp, vertical = 16.dp),
+                    )
+                }
             }
         }
         Row(Modifier.fillMaxWidth().weight(1f).padding(horizontal = 60.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {

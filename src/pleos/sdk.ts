@@ -110,7 +110,12 @@ export const gleo = {
 /* ---------- Camera (in-cabin) ---------- */
 export type CameraId = 'left' | 'front-center' | 'right';
 export const camera = {
+  /** 중앙(선택된) 칸에 쓰는 전체 이름 */
   label(id: CameraId) {
-    return { left: '좌측', 'front-center': '앞 중앙 카메라', right: '우측' }[id];
+    return { left: '좌측 카메라', 'front-center': '앞 중앙 카메라', right: '우측 카메라' }[id];
+  },
+  /** 좌우 칸에 쓰는 짧은 이름 (모두 두 글자라 칸 넓이가 변하지 않음) */
+  shortLabel(id: CameraId) {
+    return { left: '좌측', 'front-center': '중앙', right: '우측' }[id];
   },
 };
