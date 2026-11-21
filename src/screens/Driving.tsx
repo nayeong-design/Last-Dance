@@ -82,7 +82,7 @@ function RecordPanel({ onSnapshot, onToast }: { onSnapshot: () => void; onToast:
           <div className={s.recordInner}>
             <div className={s.recStatus}>
               <span className="t-body-l-bold">{rec.paused ? '일시정지' : '기록 중'}</span>
-              <RecDot className={rec.paused ? '' : s.blink} />
+              <RecDot />
               <span className="t-body-l-bold" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {fmtTime(rec.elapsed)}
               </span>
@@ -179,7 +179,7 @@ function CameraPanel({ onDone }: { onDone: () => void }) {
             <p className="t-title-m-bold">{count}초 후 촬영</p>
             <div className={s.ring}>
               <svg width="166" height="166" viewBox="0 0 166 166">
-                <circle cx="83" cy="83" r="75" stroke="rgba(189,254,28,0.2)" strokeWidth="8" fill="none" />
+                <circle cx="83" cy="83" r="75" stroke="color-mix(in srgb, var(--accent) 20%, transparent)" strokeWidth="8" fill="none" />
                 <circle
                   key={count}
                   className={s.ringArc}

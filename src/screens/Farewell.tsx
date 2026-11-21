@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { CHECKLIST, REASONS, useStore } from '../state/store';
 import { vehicle } from '../pleos/sdk';
 import { PrimaryButton, Toast, TopNav } from '../components/ui';
-import { DotActive, DotIdle, IcChat, IcDropdown, IcSnapshot, IcSunset } from '../components/icons';
+import { DotActive, DotIdle, IcChat, IcSnapshot, IcSunset } from '../components/icons';
+import { Dropdown } from '../components/Dropdown';
 import s from './Farewell.module.css';
 
 function Heading() {
@@ -62,21 +63,15 @@ export function FarewellSetup() {
   const t = useToast();
   const ready = !!(f.year && f.month && f.day) && (f.reason !== '직접입력' || f.memo.trim().length > 0);
 
-  const sel = (key: 'year' | 'month' | 'day', label: string, opts: number[]) => (
-    <label className={`select ${s.dateSelect}`}>
-      <span className="t-body-l-bold">{f[key] ? `${f[key]}${label === '년도' ? '' : ''}` : label}</span>
-      <IcDropdown />
-      <select aria-label={label} value={f[key] ?? ''} onChange={(e) => dispatch({ type: 'farewell', patch: { [key]: Number(e.target.value) } })}>
-        <option value="" disabled>
-          {label}
-        </option>
-        {opts.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
-    </label>
+  const sel = (key: 'year' | 'month' | 'day', label: string, unit: string, opts: number[]) => (
+    <Dropdown
+      className={s.dateSelect}
+      label={label}
+      placeholder={label}
+      value={f[key]}
+      options={opts.map((o) => ({ value: o, label: `${o}${unit}` }))}
+      onChange={(v) => dispatch({ type: 'farewell', patch: { [key]: v } })}
+    />
   );
 
   return (
@@ -93,22 +88,21 @@ export function FarewellSetup() {
         <div className={s.group} style={{ width: 548 }}>
           <span className="pill-label t-body-l-bold">차량 교체 일자</span>
           <div className={s.row}>
-            {sel('year', '년도', range(2026, 2028))}
-            {sel('month', '월', range(1, 12))}
-            {sel('day', '일', range(1, 31))}
+            {sel('year', '년도', '년', range(2026, 2028))}
+            {sel('month', '월', '월', range(1, 12))}
+            {sel('day', '일', '일', range(1, 31))}
           </div>
         </div>
         <div className={s.group}>
           <span className="pill-label t-body-l-bold">차량 이별 사유</span>
-          <label className="select" style={{ width: '100%' }}>
-            <span className="t-body-l-bold">{f.reason}</span>
-            <IcDropdown />
-            <select aria-label="차량 이별 사유" value={f.reason} onChange={(e) => dispatch({ type: 'farewell', patch: { reason: e.target.value } })}>
-              {REASONS.map((r) => (
-                <option key={r}>{r}</option>
-              ))}
-            </select>
-          </label>
+          <Dropdown
+            style={{ width: '100%' }}
+            label="차량 이별 사유"
+            placeholder="사유 선택"
+            value={f.reason}
+            options={REASONS.map((r) => ({ value: r, label: r }))}
+            onChange={(v) => dispatch({ type: 'farewell', patch: { reason: v } })}
+          />
           <input
             className="input t-body-l-regular"
             placeholder="차량 이별 사유를 작성하세요!"

@@ -26,6 +26,6 @@
 }
 .lastDanceGlow {
   position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 75% 48% at 50% 108%, rgba(189, 254, 28, 0.95) 0%, rgba(189, 254, 28, 0.4) 45%, transparent 100%);
+  background: radial-gradient(ellipse 75% 48% at 50% 108%, color-mix(in srgb, var(--accent) 95%, transparent) 0%, color-mix(in srgb, var(--accent) 40%, transparent) 45%, transparent 100%);
 }
 .lastDanceRow { position: absolute; left: 33px; right: 39px; top: 51px; display: flex; align-items: flex-start; justify-content: space-between; }

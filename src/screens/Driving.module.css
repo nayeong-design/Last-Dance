@@ -34,8 +34,6 @@
 .record { background: var(--bg-base); border-radius: var(--radius-md); padding: 32px; display: flex; flex-direction: column; gap: 45px; }
 .recordInner { padding: 0 4px; display: flex; flex-direction: column; gap: 81px; }
 .recStatus { display: flex; align-items: center; gap: 12px; }
-.blink { animation: blink 1.2s steps(2, start) infinite; }
-@keyframes blink { to { visibility: hidden; } }
 .stats { display: grid; grid-template-columns: 191px 87px auto; column-gap: 72px; row-gap: 28px; width: 563px; }
 .stats > div { display: flex; flex-direction: column; gap: 8px; white-space: nowrap; }
 .stats > div:nth-child(4) { grid-column: 1; }
@@ -98,7 +96,7 @@
 @keyframes popupIn { from { opacity: 0; transform: translateY(12px) scale(0.96); } to { opacity: 1; transform: none; } }
 .carGlow { position: absolute; left: 201px; top: 673px; width: 483px; height: 408px; pointer-events: none; }
 .carGlow i {
-  position: absolute; border-radius: 50%; background: rgba(189, 254, 28, 0.85); filter: blur(34px);
+  position: absolute; border-radius: 50%; background: color-mix(in srgb, var(--accent) 85%, transparent); filter: blur(34px);
   animation: glowPulse 1.6s ease-in-out infinite alternate;
 }
 @keyframes glowPulse { from { opacity: 0.55; } to { opacity: 1; } }

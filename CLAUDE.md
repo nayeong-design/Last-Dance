@@ -23,6 +23,7 @@ src/
   pleos/sdk.ts   Pleos SDK 목업 (Vehicle, Navigation, ADAS, Gleo AI, Camera, Weather)
   state/store.tsx 화면 이동·폼·녹화 상태 (useReducer)
   screens/       화면별 컴포넌트 + CSS Module
+  design-panel/  코드 없이 토큰·문구를 조정하는 디자인 패널 (DESIGN.md 7장)
 public/assets/   Figma에서 추출한 이미지(배경, 사진, 지도)
 android/         Jetpack Compose 포팅 (Android Automotive / Pleos Connect) — android/README.md
 scripts/         build_artifact.py (미리보기 링크용 단일 HTML 묶기)
@@ -54,6 +55,14 @@ scripts/         build_artifact.py (미리보기 링크용 단일 HTML 묶기)
 | 기록 백업 | Sync SDK |
 
 Android 포팅은 `android/`에 있습니다. `tokens.css` ↔ `Tokens.kt`, `typography.css` ↔ `Type.kt`, `sdk.ts` ↔ `PleosSdk.kt`, `store.tsx` ↔ `LastDanceViewModel.kt`가 1:1로 대응합니다. 실행에는 Android Studio와 Automotive 에뮬레이터(또는 Pleos Playground 에뮬레이터)가 필요합니다.
+
+## 디자인 변경 요청서 처리
+
+사용자가 "[Last Dance 디자인 변경 요청]"으로 시작하는 글을 붙여넣으면:
+1. 색/스케일/폰트 값을 `src/tokens/tokens.css`의 기본값으로 반영하고 `tokens-config.ts`의 default도 같이 바꾼다.
+2. 같은 값을 `android/.../Tokens.kt`(스케일은 `Radius`/`LDType`)에 반영한다.
+3. 문구는 해당 화면 컴포넌트(웹 + Android)의 텍스트를 바꾼다.
+4. DESIGN.md 표를 갱신하고 `npm run build` 후 화면을 확인한다.
 
 ## 알려진 제한
 

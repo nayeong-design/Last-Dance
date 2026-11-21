@@ -8,7 +8,7 @@
 }
 .group { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
 .row { display: flex; gap: 16px; }
-.dateSelect { justify-content: center; }
+.dateSelect :global(.select) { gap: var(--space-24); }
 
 .actions { position: absolute; left: 859px; top: 437px; width: 800px; display: flex; flex-direction: column; gap: 16px; }
 .startCard {
@@ -18,7 +18,7 @@
 .startCard > span:first-child { position: absolute; }
 .startGlow {
   position: absolute; left: 356px; top: -109px; width: 763px; height: 558px; border-radius: 50%;
-  background: radial-gradient(ellipse at 70% 40%, rgba(189, 254, 28, 0.55) 0%, rgba(189, 254, 28, 0.12) 40%, transparent 65%);
+  background: radial-gradient(ellipse at 70% 40%, color-mix(in srgb, var(--accent) 55%, transparent) 0%, color-mix(in srgb, var(--accent) 12%, transparent) 40%, transparent 65%);
   filter: blur(60px); pointer-events: none;
 }
 .actionRow { display: flex; gap: 16px; }

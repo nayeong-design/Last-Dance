@@ -1,10 +1,5 @@
 package com.lastdance.app.ui.screens
 
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -36,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -131,7 +125,6 @@ private fun RecordPanel(s: UiState, vm: LastDanceViewModel) {
     val rec = s.recording
     val route = Pleos.current.navigation.routeAt((rec.elapsed % 600) / 600f)
     val weather = Pleos.current.weather.now()
-    val blink by rememberInfiniteTransition(label = "rec").animateFloat(1f, 0.2f, infiniteRepeatable(tween(700), RepeatMode.Reverse), label = "dot")
 
     Column(Modifier.fillMaxSize().padding(horizontal = 40.dp), verticalArrangement = Arrangement.spacedBy(24.dp)) {
         Box(Modifier.fillMaxWidth().height(132.dp)) {
@@ -144,7 +137,7 @@ private fun RecordPanel(s: UiState, vm: LastDanceViewModel) {
             Column(Modifier.padding(36.dp), verticalArrangement = Arrangement.spacedBy(36.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     Text(if (rec.paused) "기록 중지됨" else "기록 중", style = LDType.bodyMBold)
-                    if (!rec.paused) Box(Modifier.size(16.dp).alpha(blink).clip(CircleShape).background(LD.statusRecording))
+                    Box(Modifier.size(16.dp).clip(CircleShape).background(LD.statusRecording))
                     Text(fmtTime(rec.elapsed), style = LDType.bodyMBold)
                 }
                 Row { Stat("현재 지점", route.currentPlace, Modifier.weight(2f)); Stat("이동 거리", "${route.distanceKm}km", Modifier.weight(1.3f)); Stat("기록", "스냅샷 ${rec.snapshots}", Modifier.weight(1f)) }

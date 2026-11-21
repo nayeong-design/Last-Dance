@@ -62,13 +62,13 @@
   --border-strong: var(--p-gray-300);
   --border-card: #252629;
   --border-accent: var(--p-lime-key);
-  --border-accent-soft: rgba(189, 254, 28, 0.8);
+  --border-accent-soft: color-mix(in srgb, var(--accent) 80%, transparent);
   --border-gallery: var(--p-lime-700);
 
   /* accent */
   --accent: var(--p-lime-key);
-  --accent-glow: rgba(189, 254, 28, 0.5);
-  --accent-wash: linear-gradient(140.84deg, rgba(189, 254, 28, 0.1) 10.21%, rgba(68, 177, 92, 0.1) 93.1%, rgba(189, 254, 28, 0.3) 115.61%);
+  --accent-glow: color-mix(in srgb, var(--accent) 50%, transparent);
+  --accent-wash: linear-gradient(140.84deg, color-mix(in srgb, var(--accent) 10%, transparent) 10.21%, rgba(68, 177, 92, 0.1) 93.1%, color-mix(in srgb, var(--accent) 30%, transparent) 115.61%);
 
   /* status */
   --status-recording: var(--p-red-500);
@@ -80,13 +80,13 @@
   --map-waypoint: var(--p-purple-500);
 
   /* radius (spacing/radius tokens) */
-  --radius-xs: 10px;
-  --radius-sm: 16px;
-  --radius-md: 20px;
-  --radius-lg: 24px;
-  --radius-xl: 28px;
-  --radius-2xl: 32px;
-  --radius-window: 40px;
+  --radius-xs: calc(10px * var(--radius-scale, 1));
+  --radius-sm: calc(16px * var(--radius-scale, 1));
+  --radius-md: calc(20px * var(--radius-scale, 1));
+  --radius-lg: calc(24px * var(--radius-scale, 1));
+  --radius-xl: calc(28px * var(--radius-scale, 1));
+  --radius-2xl: calc(32px * var(--radius-scale, 1));
+  --radius-window: calc(40px * var(--radius-scale, 1));
   --radius-pill: 999px;
 
   /* spacing (4px grid) */

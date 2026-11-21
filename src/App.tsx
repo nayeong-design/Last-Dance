@@ -6,6 +6,7 @@ import Checklist from './screens/Checklist';
 import Driving from './screens/Driving';
 import Gallery from './screens/Gallery';
 import Detail from './screens/Detail';
+import DesignPanel from './design-panel/DesignPanel';
 
 const WINDOW_VARIANT: Partial<Record<Screen, 'base' | 'surface'>> = {
   home: 'base',
@@ -37,29 +38,51 @@ const DEV_LINKS: [Screen, string][] = [
 ];
 
 const DEVNAV_H = 44;
+const PANEL_W = 360;
 
 /** 2600×1480 IVI 스테이지를 뷰포트에 맞춰 스케일 */
-function useStageScale() {
-  const calc = () => Math.min(window.innerWidth / 2600, (window.innerHeight - DEVNAV_H) / 1480);
+function useStageScale(panelOpen: boolean) {
+  const calc = () => Math.min((window.innerWidth - (panelOpen ? PANEL_W : 0)) / 2600, (window.innerHeight - DEVNAV_H) / 1480);
   const [scale, setScale] = useState(calc);
   useEffect(() => {
     const on = () => setScale(calc());
+    on();
     window.addEventListener('resize', on);
     return () => window.removeEventListener('resize', on);
-  }, []);
+  }, [panelOpen]); // eslint-disable-line react-hooks/exhaustive-deps
   return scale;
+}
+
+function usePanelOpen() {
+  const [open, setOpen] = useState(() => {
+    try {
+      return localStorage.getItem('last-dance:panel-open') === '1';
+    } catch {
+      return false;
+    }
+  });
+  const set = (v: boolean) => {
+    setOpen(v);
+    try {
+      localStorage.setItem('last-dance:panel-open', v ? '1' : '0');
+    } catch {
+      /* ignore */
+    }
+  };
+  return [open, set] as const;
 }
 
 function Stage() {
   const { s, go } = useStore();
-  const scale = useStageScale();
+  const [panelOpen, setPanelOpen] = usePanelOpen();
+  const scale = useStageScale(panelOpen);
   const driving = s.screen === 'driving' || s.screen === 'camera';
   const Screen = SCREENS[s.screen];
   const variant = WINDOW_VARIANT[s.screen] ?? 'base';
 
   return (
     <>
-      <div className="viewport">
+      <div className="viewport" style={{ right: panelOpen ? PANEL_W : 0 }}>
         <div className="stage" style={{ transform: `translate(-50%, -50%) scale(${scale})` }}>
           <img className="stage__bg" src={driving ? 'assets/bg-driving.png' : 'assets/bg-parked.png'} alt="" />
           {driving ? (
@@ -80,6 +103,7 @@ function Stage() {
           </button>
         ))}
       </nav>
+      <DesignPanel open={panelOpen} onOpenChange={setPanelOpen} />
     </>
   );
 }

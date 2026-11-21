@@ -69,6 +69,7 @@
 | `MiniPlayer` | ui.tsx | 미디어 카드(현재 정적 이미지) |
 | `Toast` | ui.tsx | 하단 피드백 |
 | `.card`, `.card--lime-glow` | base.css | 카드 표면 |
+| `Dropdown` | Dropdown.tsx | 선택 목록. 브라우저 기본 목록 대신 bg-elevated 표면 · radius-xl · 80px 행 · 선택 시 accent 체크. 공간이 없으면 위로 펼침 |
 | `.select`, `.input`, `.pill-label` | base.css | 폼 |
 | `.tab`, `.tab__bar` | base.css | 갤러리 탭 |
 | 아이콘 | icons.tsx | Figma SVG export를 그대로 옮김 |
@@ -97,3 +98,20 @@
 - 체크리스트 0개 선택 → 시작하기 비활성
 - 갤러리 검색/탭 결과 없음 → 빈 상태 문구
 - 녹화 일시정지/재개, 스냅샷 카운트 반영, 알리기 취소
+
+## 7. 디자인 패널 (코드 없이 조정하기)
+
+화면 오른쪽 아래 **디자인 조정** 버튼을 누르면 패널이 열립니다.
+
+| 할 수 있는 것 | 바뀌는 토큰 |
+|---|---|
+| 포인트 색 프리셋 · 색상 9종 | `--accent`, `--text-accent`, `--bg-*`, `--text-primary/secondary`, `--status-recording` |
+| 모서리 둥글기 | `--radius-scale` (모든 `--radius-*`에 곱해짐) |
+| 제목 / 본문 크기 | `--type-scale-title`, `--type-scale-body` |
+| 폰트 | `--font-family` (Google Fonts 한글 폰트) |
+| 문구 수정 모드 | 화면 글자를 클릭해서 직접 수정 (화면을 옮겨도 유지) |
+
+- 바꾼 값은 그 브라우저에만 저장됩니다. **변경 요청서 복사**를 눌러 Claude에게 붙여넣으면 실제 코드(웹 + Android)와 이 문서에 반영됩니다.
+- 패널에 항목을 더하려면 `src/design-panel/tokens-config.ts`에 한 줄을 추가합니다.
+- 라임 계열 파생 색(글로우, 테두리, 워시)은 `color-mix()`로 `--accent`에서 계산되므로 포인트 색 하나만 바꾸면 같이 바뀝니다.
+- 패널 자체 스타일(`DesignPanel.module.css`)은 도구 UI라서 앱 토큰 규칙의 예외입니다.
