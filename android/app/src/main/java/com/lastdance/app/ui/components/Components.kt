@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -45,24 +46,14 @@ import com.lastdance.app.ui.theme.LDType
 import com.lastdance.app.ui.theme.Radius
 
 /** 웹 `.pressable` — 누르면 살짝 작아진다. 차량 환경이라 리플 대신 스케일 피드백. */
-fun Modifier.pressable(label: String? = null, role: Role = Role.Button, onClick: () -> Unit): Modifier = this.then(
-    Modifier.composedPressable(label, role, onClick)
-)
-
-@Composable
-private fun pressScale(source: MutableInteractionSource): Float {
-    val pressed by source.collectIsPressedAsState()
-    return if (pressed) 0.97f else 1f
+fun Modifier.pressable(label: String? = null, role: Role = Role.Button, onClick: () -> Unit): Modifier = composed {
+    val src = remember { MutableInteractionSource() }
+    val pressed by src.collectIsPressedAsState()
+    this
+        .scale(if (pressed) 0.97f else 1f)
+        .clickable(interactionSource = src, indication = null, role = role, onClick = onClick)
+        .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier)
 }
-
-private fun Modifier.composedPressable(label: String?, role: Role, onClick: () -> Unit) =
-    androidx.compose.ui.composed {
-        val src = remember { MutableInteractionSource() }
-        this
-            .scale(pressScale(src))
-            .clickable(interactionSource = src, indication = null, role = role, onClick = onClick)
-            .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier)
-    }
 
 /** TopNav — 높이 148, 뒤로 · 제목(부제) · 우측 슬롯 */
 @Composable
