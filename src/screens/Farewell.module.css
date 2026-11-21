@@ -1,0 +1,52 @@
+.heading { position: absolute; left: 67px; top: 181px; width: 676px; display: flex; flex-direction: column; gap: 16px; }
+.carLine { position: absolute; left: 67px; top: 411px; display: flex; gap: 16px; color: var(--p-white); }
+
+.form {
+  position: absolute; left: 67px; top: 485px; width: 676px; padding: 20px;
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl);
+  display: flex; flex-direction: column; gap: 40px;
+}
+.group { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+.row { display: flex; gap: 16px; flex-wrap: nowrap; }
+.dateSelect :global(.select) { gap: var(--space-16); padding-inline: var(--space-28); }
+.row { width: 100%; }
+.row > * { flex: 1 0 auto; }
+
+.actions { position: absolute; left: 859px; top: 437px; width: 800px; display: flex; flex-direction: column; gap: 16px; }
+.startCard {
+  height: 398px; width: 800px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+}
+.startCard > * { position: relative; }
+.startCard > span:first-child { position: absolute; }
+.startGlow {
+  position: absolute; left: 356px; top: -109px; width: 763px; height: 558px; border-radius: 50%;
+  background: radial-gradient(ellipse at 70% 40%, color-mix(in srgb, var(--accent) 55%, transparent) 0%, color-mix(in srgb, var(--accent) 12%, transparent) 40%, transparent 65%);
+  filter: blur(60px); pointer-events: none;
+}
+.actionRow { display: flex; gap: 16px; }
+.smallCard { width: 392px; height: 264px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; }
+
+/* plan */
+.planLeft { position: absolute; left: 39px; top: 181px; width: 729px; }
+.planLeft .heading { position: static; padding: 0 28px; width: auto; }
+.timeline { position: relative; list-style: none; margin: 100px 28px 0; display: flex; flex-direction: column; gap: 28px; }
+.timelineLine {
+  position: absolute; left: 21px; top: 194px; height: 417px; border-left: 2px dashed var(--border-strong);
+}
+.step { display: flex; align-items: center; gap: 48px; position: relative; padding-bottom: 28px; }
+.step:not(:last-child)::after {
+  content: ''; position: absolute; left: 53.5px; bottom: 0; width: 566px; height: 1px; background: var(--border-strong);
+}
+.step:last-child { padding-bottom: 0; }
+.step:not(:last-child) { margin-bottom: -28px; }
+.timeline { gap: 56px; }
+.stepDot { position: relative; width: 44px; height: 44px; flex: none; z-index: 1; }
+.stepActiveLine { position: absolute; left: 21px; top: 44px; height: 123px; border-left: 2px dashed var(--accent); }
+.stepText { display: flex; flex-direction: column; gap: 8px; }
+
+.model { position: absolute; left: 884px; top: 245px; color: var(--p-white); }
+.summary {
+  position: absolute; left: 859px; top: 295px; padding: 16px 32px; border-radius: 99px; background: var(--bg-base);
+  display: flex; align-items: center; gap: 20px; white-space: nowrap;
+}
+.vline { width: 1px; height: 29px; background: var(--border-strong); margin: 0 8px; }

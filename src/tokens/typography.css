@@ -1,0 +1,30 @@
+/*
+ * Type ramp — names mirror Figma text styles (Typography/<Group>/<Size>/<Weight>).
+ * Use these classes; do not set font-size/line-height ad hoc in components.
+ */
+.t-headline-l-bold { font: 700 calc(60px * var(--type-scale-title, 1))/calc(80px * var(--type-scale-title, 1)) var(--font-family); }
+.t-headline-s-bold { font: 700 calc(48px * var(--type-scale-title, 1))/calc(64px * var(--type-scale-title, 1)) var(--font-family); }
+.t-headline-s-xbold { font: 800 calc(48px * var(--type-scale-title, 1))/calc(64px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-l-bold { font: 700 calc(40px * var(--type-scale-title, 1))/calc(52px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-l-xbold { font: 800 calc(40px * var(--type-scale-title, 1))/calc(52px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-m-bold { font: 700 calc(36px * var(--type-scale-title, 1))/calc(44px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-m-semibold { font: 600 calc(36px * var(--type-scale-title, 1))/calc(44px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-m-xbold { font: 800 calc(36px * var(--type-scale-title, 1))/calc(44px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-s-regular { font: 400 calc(32px * var(--type-scale-title, 1))/calc(40px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-s-bold { font: 700 calc(32px * var(--type-scale-title, 1))/calc(40px * var(--type-scale-title, 1)) var(--font-family); }
+.t-title-s-xbold { font: 800 calc(32px * var(--type-scale-title, 1))/calc(40px * var(--type-scale-title, 1)) var(--font-family); }
+.t-body-l-regular { font: 400 calc(30px * var(--type-scale-body, 1))/calc(38px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-l-bold { font: 700 calc(30px * var(--type-scale-body, 1))/calc(38px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-m-regular { font: 400 calc(28px * var(--type-scale-body, 1))/calc(36px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-m-semibold { font: 600 calc(28px * var(--type-scale-body, 1))/calc(36px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-m-bold { font: 700 calc(28px * var(--type-scale-body, 1))/calc(36px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-s-regular { font: 400 calc(26px * var(--type-scale-body, 1))/calc(34px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-s-semibold { font: 600 calc(26px * var(--type-scale-body, 1))/calc(34px * var(--type-scale-body, 1)) var(--font-family); }
+.t-body-s-bold { font: 700 calc(26px * var(--type-scale-body, 1))/calc(34px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-m-regular { font: 400 calc(24px * var(--type-scale-body, 1))/calc(28px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-m-medium { font: 500 calc(24px * var(--type-scale-body, 1))/calc(28px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-m-bold { font: 700 calc(24px * var(--type-scale-body, 1))/calc(28px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-m-xbold { font: 800 calc(24px * var(--type-scale-body, 1))/calc(28px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-s-medium { font: 500 calc(22px * var(--type-scale-body, 1))/calc(26px * var(--type-scale-body, 1)) var(--font-family); }
+.t-label-s-regular { font: 400 calc(20px * var(--type-scale-body, 1))/calc(24px * var(--type-scale-body, 1)) var(--font-family); }
+.t-caption-medium { font: 500 calc(18px * var(--type-scale-body, 1))/calc(22px * var(--type-scale-body, 1)) var(--font-family); }

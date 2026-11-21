@@ -1,0 +1,31 @@
+.today {
+  position: absolute; left: 39px; top: 137px; width: 1106px; height: 746px;
+  border-radius: var(--radius-md); background: var(--bg-surface); border: 1px solid var(--border-card);
+  box-shadow: inset 0 0 70px 0 var(--p-gray-100);
+}
+.todayHead { position: absolute; left: 39px; right: 39px; top: 71px; display: flex; flex-direction: column; }
+.todayArrow { position: absolute; left: 958px; top: 75px; }
+.features { position: absolute; left: 39px; top: 551px; display: flex; list-style: none; }
+.feature {
+  width: 198px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+  position: relative; margin-right: 62px;
+}
+.feature:not(:last-child)::after {
+  content: ''; position: absolute; right: -31px; top: 0; height: 118px; width: 1px; background: var(--border-subtle);
+}
+.feature:last-child { margin-right: 0; }
+
+.log {
+  position: absolute; left: 1169px; top: 137px; width: 490px; height: 449px; padding: 40px;
+  border-radius: var(--radius-md); background: var(--bg-card-strong);
+  display: flex; align-items: flex-start; justify-content: space-between; text-align: left;
+}
+.lastDance {
+  position: absolute; left: 1169px; top: 610px; width: 490px; height: 273px; overflow: hidden;
+  border-radius: var(--radius-md); border: 1px solid var(--border-accent-soft); background: var(--accent-wash);
+}
+.lastDanceGlow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 75% 48% at 50% 108%, color-mix(in srgb, var(--accent) 95%, transparent) 0%, color-mix(in srgb, var(--accent) 40%, transparent) 45%, transparent 100%);
+}
+.lastDanceRow { position: absolute; left: 33px; right: 39px; top: 51px; display: flex; align-items: flex-start; justify-content: space-between; }

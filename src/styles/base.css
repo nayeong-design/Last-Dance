@@ -1,0 +1,116 @@
+@import '../tokens/tokens.css';
+@import '../tokens/typography.css';
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  background: #000;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+img { display: block; }
+
+/* ---------- Stage (Pleos Connect 2600×1480 canvas, scaled to viewport) ---------- */
+.viewport { position: fixed; inset: 0 0 44px; overflow: hidden; background: #050506; }
+.stage {
+  position: absolute; left: 50%; top: 50%; width: var(--stage-w); height: var(--stage-h);
+  border-radius: 24px; overflow: hidden; transform-origin: center;
+}
+.stage__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.app-window {
+  position: absolute; left: var(--app-x); top: var(--app-y); width: var(--app-w); height: var(--app-h);
+  border-radius: var(--radius-window); overflow: hidden; border: 1px solid rgba(19, 20, 23, 0.2);
+  box-shadow: var(--shadow-level1);
+}
+.app-window--base { background: var(--bg-base); }
+.app-window--surface { background: var(--bg-surface); }
+.screen-enter { animation: screenIn var(--dur-slow) var(--ease-standard); }
+@keyframes screenIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Top navigation (ivi Top navigation component) ---------- */
+.topnav { position: absolute; left: 0; top: 0; width: 100%; height: 148px; display: flex; align-items: center; justify-content: space-between; padding: 8px 40px; z-index: 2; }
+.topnav__side { width: 111px; height: 132px; display: grid; place-items: center; }
+.topnav__back { width: 111px; height: 132px; display: grid; place-items: center; border-radius: var(--radius-md); transition: background var(--dur-fast); }
+.topnav__back:active { background: var(--bg-glass); }
+.topnav__center { width: 899px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; }
+
+/* ---------- Buttons ---------- */
+.btn-circle { width: 93px; height: 93px; border-radius: 60px; background: var(--bg-glass); display: grid; place-items: center; color: #fff; flex: none; transition: transform var(--dur-fast), background var(--dur-fast); }
+.btn-primary {
+  height: 100px; border-radius: var(--radius-md); background: var(--accent); color: var(--text-on-accent);
+  display: flex; align-items: center; justify-content: center; transition: transform var(--dur-fast), filter var(--dur-fast);
+}
+.btn-primary:disabled { filter: grayscale(1) brightness(0.6); cursor: not-allowed; }
+.pressable { transition: transform var(--dur-fast) var(--ease-standard), filter var(--dur-fast); }
+.pressable:active, .btn-primary:active:not(:disabled), .btn-circle:active { transform: scale(0.97); filter: brightness(1.1); }
+
+.pill-label { height: 74px; padding: 18px 40px; border-radius: 99px; background: var(--bg-base); display: inline-flex; align-items: center; }
+.select {
+  position: relative; height: 74px; padding: 18px 40px; border-radius: 100px; background: var(--bg-elevated);
+  border: 1px solid var(--border-strong); display: inline-flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.select select { position: absolute; inset: 0; opacity: 0; cursor: pointer; font-size: 30px; }
+.input {
+  height: 74px; width: 100%; padding: 20px 36px; border-radius: 99px; background: var(--bg-elevated);
+  border: 1px solid var(--border-strong); color: var(--text-primary); outline: none;
+}
+.input::placeholder { color: var(--text-disabled); }
+.input:focus { border-color: var(--accent); }
+
+/* ---------- Cards ---------- */
+.card { position: relative; border-radius: var(--radius-xl); background: var(--bg-elevated); border: 1px solid var(--border-subtle); overflow: hidden; text-align: left; }
+.card--lime-glow { box-shadow: inset -8px 2px 17.6px color-mix(in srgb, var(--accent) 10%, transparent); }
+.glow-blob { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(120px); }
+
+/* ---------- Mini player (media) ---------- */
+.mini-player { position: relative; border-radius: var(--radius-md); overflow: hidden; display: block; }
+.mini-player img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Tab bar ---------- */
+.tab { padding: 20px 28px; position: relative; }
+.tab__bar { position: absolute; left: -2px; top: 76px; height: 4px; width: calc(100% + 4px); background: var(--accent); border-radius: var(--radius-md); }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%); padding: 20px 36px; border-radius: var(--radius-lg);
+  background: var(--bg-pressed); box-shadow: var(--shadow-level1); z-index: 30; animation: toastIn var(--dur-base) var(--ease-standard);
+}
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 16px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* ---------- Dev navigator (outside the stage) ---------- */
+.devnav { position: fixed; left: 12px; bottom: 8px; z-index: 100; display: flex; gap: 6px; flex-wrap: wrap; max-width: calc(100vw - 24px); }
+.devnav button { font: 500 12px/1 system-ui, sans-serif; padding: 7px 10px; border-radius: 8px; background: rgba(255,255,255,0.08); color: #c7c9ce; border: 1px solid rgba(255,255,255,0.12); }
+.devnav button[aria-pressed='true'] { background: var(--accent); color: #131417; }
+
+/* ---------- Dropdown (디자인 시스템 선택 목록) ---------- */
+.dropdown { position: relative; display: inline-block; }
+.dropdown__trigger { white-space: nowrap; width: 100%; text-align: left; color: var(--text-primary); transition: border-color var(--dur-fast) var(--ease-standard); }
+.dropdown--open .dropdown__trigger, .dropdown__trigger:focus-visible { border-color: var(--accent); outline: none; }
+.dropdown__placeholder { color: var(--text-primary); }
+.dropdown__chevron { flex: none; transition: transform var(--dur-base) var(--ease-standard); }
+.dropdown--open .dropdown__chevron { transform: rotate(180deg); }
+.dropdown__list {
+  position: absolute; left: 0; top: calc(100% + var(--space-12)); z-index: 20; min-width: 100%;
+  list-style: none; padding: var(--space-12); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--bg-pressed) transparent;
+  background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  animation: ddIn var(--dur-base) var(--ease-standard);
+  transform-origin: top center;
+}
+.dropdown__list--up { top: auto; bottom: calc(100% + var(--space-12)); transform-origin: bottom center; }
+@keyframes ddIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+.dropdown__option {
+  height: 80px; padding: 0 var(--space-28); border-radius: var(--radius-md); white-space: nowrap; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-24); color: var(--text-secondary);
+}
+.dropdown__option.is-active { background: var(--bg-pressed); color: var(--text-primary); }
+.dropdown__option[aria-selected='true'] { color: var(--text-accent); }
+
+/* ---------- 디자인 패널: 문구 수정 모드 ---------- */
+.stage--copy-edit { cursor: text; }
+.stage--copy-edit *:not(:has(*)):hover { outline: 2px dashed color-mix(in srgb, var(--accent) 70%, transparent); outline-offset: 4px; border-radius: 4px; }
+.stage--copy-edit .is-editing { outline: 3px solid var(--accent) !important; outline-offset: 4px; border-radius: 4px; caret-color: var(--accent); }
